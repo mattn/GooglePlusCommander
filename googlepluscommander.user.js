@@ -39,31 +39,31 @@
         case 'c':
           elems = tools(e.target);
           click(elems[2]);
-		  return;
+          return;
           break;
         case 'g':
           window.scrollTo(0, 0);
-		  return;
+          return;
           break;
         case 'G':
           window.scrollTo(0, 9999);
-		  return;
+          return;
           break;
         case 'n':
           click(document.getElementById("gbi1"));
-		  return;
+          return;
           break;
         case 's':
           elems = tools(e.target);
           click(elems[3]);
-		  return;
+          return;
           break;
         case '+':
           plus(e.target);
-		  return;
+          return;
           break;
       }
-	  e.preventDefault();
+      e.preventDefault();
     }, false)
     elem.className += ' gpcommander';
   }
