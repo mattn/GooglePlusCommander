@@ -32,7 +32,7 @@
 
   function installKey(elem) {
     elem.addEventListener('keyup', function(e) {
-      if (e.target.nodeName.toUpperCase() == 'TEXTAREA') return;
+      if (e.target.id.substring(0, 7) != 'update-') return;
       var c = String.fromCharCode(e.keyCode ? e.keyCode : e.charCode)
       if (!e.shiftKey) c = c.toLowerCase();
       switch (c) {
