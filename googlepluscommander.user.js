@@ -53,7 +53,7 @@
   }
 
   function hasClass(elem, clazz) {
-    var zz = elem.className.split(/\s*/g);
+    var zz = elem.className.split(/\s+/g);
 	for (var m = 0; m < zz.length; m++) {
 		if (zz[m] == clazz) return true;
 	}
