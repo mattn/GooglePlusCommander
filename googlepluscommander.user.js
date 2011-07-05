@@ -30,7 +30,7 @@
     });
   }
 
-  function install(elem) {
+  function installKey(elem) {
     elem.addEventListener('keyup', function(e) {
       switch (e.keyCode) {
         case 67:
@@ -49,11 +49,24 @@
           break;
       }
     }, false)
+    elem.className += ' gpcommander';
   }
 
-  var elems = document.getElementsByTagName('div');
-  for (var n = 0; n < elems.length; n++) {
-    var e = elems[n];
-    if (e.id.substring(0, 7) == 'update-') install(e);
+  function hasClass(elem, clazz) {
+    var zz = elem.className.split(/\s*/g);
+	for (var m = 0; m < zz.length; m++) {
+		if (zz[m] == clazz) return true;
+	}
+    return false;
   }
+
+  function install() {
+    var elems = document.getElementsByTagName('div');
+    for (var n = 0; n < elems.length; n++) {
+      var e = elems[n];
+      if (hasClass(e, 'gpcommander')) continue;
+      if (e.id.substring(0, 7) == 'update-') installKey(e);
+    }
+  }
+  window.setInterval(install, 1000);
 })()
