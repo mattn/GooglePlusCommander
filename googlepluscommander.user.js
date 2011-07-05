@@ -25,10 +25,19 @@
   }
 
   function tools(elem) {
-    return Array.prototype.slice.call(elem.getElementsByTagName('span'), 0).filter(function(e, i, a) {
-      if (e.getAttribute('role') != 'button') return false;
-      return true;
-    });
+    var ret = [];
+    var elems = elem.getElementsByTagName('button');
+    for (var n = 0; n < elems.length; n++) {
+      if (elems[n].getAttribute('g:type') == 'plusone') {
+        var next = elems[n];
+        while (next) {
+          if (next.nodeType == 1 && next.getAttribute('role') == 'button')
+            ret.push(next);
+          next = next.nextSibling;
+        }
+      }
+    }
+    return ret;
   }
 
   function installKey(elem) {
@@ -38,8 +47,7 @@
       if (!e.shiftKey) c = c.toLowerCase();
       switch (c) {
         case 'c':
-          elems = tools(e.target);
-          click(elems[2]);
+          click(tools(e.target)[0]);
           return;
           break;
         case 'g':
@@ -55,8 +63,7 @@
           return;
           break;
         case 's':
-          elems = tools(e.target);
-          click(elems[3]);
+          click(tools(e.target)[1]);
           return;
           break;
         case '+':
