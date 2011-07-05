@@ -66,7 +66,7 @@
           click(tools(e.target)[1]);
           return;
           break;
-        case '+':
+        case '+', '\xbb':
           plus(e.target);
           return;
           break;
