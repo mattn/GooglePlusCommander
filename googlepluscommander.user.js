@@ -4,13 +4,14 @@
 // @version Tue, 05 Jul 2011
 // @namespace https://github.com/mattn/googlepluscommander
 // @description keybinds for Google+. you can use j/k to scroll, and type 'c' to comment, 's' to share, '+' to +1.
+// @include https://plus.google.com/*
 // @match https://plus.google.com/*
 // ==/UserScript==
 
 (function() {
   function click(elem) {
     var e = document.createEvent("MouseEvent");
-    e.initMouseEvent("click", true, true, event.view, 0, 0, 0, 0, 0, false, false, false, 0, null);
+    e.initMouseEvent("click", true, true, e.view, 0, 0, 0, 0, 0, false, false, false, 0, null);
     elem.dispatchEvent(e);
   }
 
