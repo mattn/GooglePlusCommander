@@ -37,6 +37,9 @@
           elems = tools(e.target);
           click(elems[2]);
           break;
+        case 71:
+		  window.scrollTo(0, e.shiftKey ? 9999 : 0);
+          break;
         case 83:
           elems = tools(e.target);
           click(elems[3]);
