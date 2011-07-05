@@ -35,11 +35,11 @@
       switch (e.keyCode) {
         case 67:
           elems = tools(e.target);
-          click(elems[elems.length - 2]);
+          click(elems[2]);
           break;
         case 83:
           elems = tools(e.target);
-          click(elems[elems.length - 1]);
+          click(elems[3]);
           break;
         case 187:
           plus(e.target);
