@@ -32,26 +32,38 @@
 
   function installKey(elem) {
     elem.addEventListener('keyup', function(e) {
-      switch (e.keyCode) {
-        case 67:
+      if (e.target.nodeName.toUpperCase() == 'TEXTAREA') return;
+      var c = String.fromCharCode(e.keyCode ? e.keyCode : e.charCode)
+      if (!e.shiftKey) c = c.toLowerCase();
+      switch (c) {
+        case 'c':
           elems = tools(e.target);
           click(elems[2]);
+		  return;
           break;
-        case 71:
-          window.scrollTo(0, e.shiftKey ? 9999 : 0);
+        case 'g':
+          window.scrollTo(0, 0);
+		  return;
           break;
-//TODO
-//        case 78:
-//          click(document.getElementById("gbi1"));
-//          break;
-        case 83:
+        case 'G':
+          window.scrollTo(0, 9999);
+		  return;
+          break;
+        case 'n':
+          click(document.getElementById("gbi1"));
+		  return;
+          break;
+        case 's':
           elems = tools(e.target);
           click(elems[3]);
+		  return;
           break;
-        case 187:
+        case '+':
           plus(e.target);
+		  return;
           break;
       }
+	  e.preventDefault();
     }, false)
     elem.className += ' gpcommander';
   }
