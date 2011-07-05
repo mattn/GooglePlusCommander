@@ -47,8 +47,10 @@
       if (!e.shiftKey) c = c.toLowerCase();
       switch (c) {
         case 'c':
-          click(tools(e.target)[0]);
-          return;
+          if (!e.ctrlKey) {
+            click(tools(e.target)[0]);
+            return;
+          }
           break;
         case 'g':
           window.scrollTo(0, 0);
