@@ -4,11 +4,14 @@ Google+ Commander
 What is this
 ------------
 
-shortcut keys for google+
+This is userscript for Google+. This script provide shortcut keys to do following.
 
 * c to comment
 * s to share
 * + to +1
+* g to go to top.
+* G to go to bottom.
+* n to show notification panel.
 
 Install
 -------
