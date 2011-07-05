@@ -10,8 +10,8 @@
 
 (function() {
   function click(elem) {
-    var e = document.createEvent("MouseEvent");
-    e.initMouseEvent("click", true, true, e.view, 0, 0, 0, 0, 0, false, false, false, 0, null);
+    var e = document.createEvent('MouseEvent');
+    e.initMouseEvent('click', true, true, e.view, 0, 0, 0, 0, 0, false, false, false, 0, null);
     elem.dispatchEvent(e);
   }
 
@@ -51,7 +51,7 @@
           return;
           break;
         case 'n':
-          click(document.getElementById("gbi1"));
+          click(document.getElementById('gbi1'));
           return;
           break;
         case 's':
