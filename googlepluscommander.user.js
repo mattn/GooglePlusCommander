@@ -11,7 +11,7 @@
 (function() {
   function click(elem) {
     var e = document.createEvent('MouseEvent');
-    e.initMouseEvent('click', true, true, e.view, 0, 0, 0, 0, 0, false, false, false, 0, null);
+    e.initMouseEvent('click', true, true, e.view||window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
     elem.dispatchEvent(e);
   }
 
