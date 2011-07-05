@@ -17,7 +17,7 @@
 
   function cancel(elem) {
     var e = document.createEvent('KeyboardEvent');
-	e.initKeyEvent("keyup", true, true, null, false, false, false, false, 27, 0);
+    e.initKeyEvent("keyup", true, true, null, false, false, false, false, 27, 0);
     elem.dispatchEvent(e);
   }
 
