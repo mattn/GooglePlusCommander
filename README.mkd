@@ -1,19 +1,22 @@
 Google+ Commander
 =================
 
-何これ
+What is this
+------------
+
+shortcut keys for google+
+
+* c to comment
+* s to share
+* + to +1
+
+Install
+-------
+
+https://github.com/mattn/GooglePlusCommander/raw/master/googlepluscommander.user.js
+
+Author
 ------
 
-キーボードだけでGoogle+使いたいよねー
+mattn <mattn.jp@gmail.com>
 
-
-インストールとか
-----------------
-
-この辺みてねー
-https://plus.google.com/106556399716935975875/posts/gsEmDZZPLBF?tab=XX
-
-誰よこんなの作ったの
---------------------
-
-知らない
