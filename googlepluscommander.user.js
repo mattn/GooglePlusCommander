@@ -38,8 +38,12 @@
           click(elems[2]);
           break;
         case 71:
-		  window.scrollTo(0, e.shiftKey ? 9999 : 0);
+          window.scrollTo(0, e.shiftKey ? 9999 : 0);
           break;
+//TODO
+//        case 78:
+//          click(document.getElementById("gbi1"));
+//          break;
         case 83:
           elems = tools(e.target);
           click(elems[3]);
@@ -54,9 +58,9 @@
 
   function hasClass(elem, clazz) {
     var zz = elem.className.split(/\s+/g);
-	for (var m = 0; m < zz.length; m++) {
-		if (zz[m] == clazz) return true;
-	}
+    for (var m = 0; m < zz.length; m++) {
+      if (zz[m] == clazz) return true;
+    }
     return false;
   }
 
