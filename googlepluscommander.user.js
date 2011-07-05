@@ -15,6 +15,12 @@
     elem.dispatchEvent(e);
   }
 
+  function cancel(elem) {
+    var e = document.createEvent('KeyboardEvent');
+	e.initKeyEvent("keyup", true, true, null, false, false, false, false, 27, 0);
+    elem.dispatchEvent(e);
+  }
+
   function plus(elem) {
     var elems = elem.getElementsByTagName('button');
     for (var n = 0; n < elems.length; n++) {
@@ -71,6 +77,9 @@
         case '+', '\xbb':
           plus(e.target);
           return;
+          break;
+        case '\x1b':
+          cancel(e.target);
           break;
       }
       e.preventDefault();
