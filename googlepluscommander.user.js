@@ -64,8 +64,7 @@
     var elems = document.getElementsByTagName('div');
     for (var n = 0; n < elems.length; n++) {
       var e = elems[n];
-      if (hasClass(e, 'gpcommander')) continue;
-      if (e.id.substring(0, 7) == 'update-') installKey(e);
+      if (e.id.substring(0, 7) == 'update-' && !hasClass(e, 'gpcommander')) installKey(e);
     }
   }
   window.setInterval(install, 1000);
