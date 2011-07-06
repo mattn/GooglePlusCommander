@@ -40,12 +40,27 @@
     return ret;
   }
 
+  function newEntry() {
+    var elems = getElementsByTagAndClassName('div', 'n-Nd');
+    if (elems.length > 0) {
+      window.scrollTo(0, 0);
+      click(elems[0]);
+      return true;
+    }
+    return false;
+  }
+
   function installKey(elem) {
     elem.addEventListener('keyup', function(e) {
       if (e.target.id.substring(0, 7) != 'update-') return;
       var c = String.fromCharCode(e.keyCode ? e.keyCode : e.charCode)
       if (!e.shiftKey) c = c.toLowerCase();
       switch (c) {
+        case 'i':
+          if (newEntry()) {
+            return;
+          }
+          break;
         case 'c':
           if (!e.ctrlKey) {
             click(tools(e.target)[0]);
@@ -84,6 +99,18 @@
       if (zz[m] == clazz) return true;
     }
     return false;
+  }
+
+  function getElementsByTagAndClassName(tag, clazz) {
+    var retval = [];
+    var elems = document.getElementsByTagName(tag);
+    for (var i = 0, I = elems.length; i < I; ++i) {
+      var e = elems[i];
+      if (hasClass(e, clazz)) {
+        retval.push(e);
+      }
+    }
+    return retval;
   }
 
   function install() {

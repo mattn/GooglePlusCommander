@@ -12,6 +12,7 @@ This is userscript for Google+. This script provide shortcut keys to do followin
 * g to go to top.
 * G to go to bottom.
 * n to show notification panel.
+* i to focus to a form of new entry.
 
 Install
 -------
