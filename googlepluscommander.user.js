@@ -81,45 +81,138 @@
     return false;
   }
 
-  function installKey(elem) {
-    elem.addEventListener('keyup', function(e) {
-      if (e.target.id.substring(0, 7) != 'update-') return;
-      var c = String.fromCharCode(e.keyCode ? e.keyCode : e.charCode)
-      if (!e.shiftKey) c = c.toLowerCase();
-      switch (c) {
-        case 'i':
-          if (newEntry()) {
-            return;
-          }
-          break;
-        case 'c':
-          if (!e.ctrlKey) {
-            click(tools(e.target)[0]);
-            return;
-          }
-          break;
-        case 'g':
-          window.scrollTo(0, 0);
-          return;
-          break;
-        case 'G':
-          window.scrollTo(0, 9999);
-          return;
-          break;
-        case 'n':
-          click(document.getElementById('gbi1'));
-          return;
-          break;
-        case 's':
-          click(tools(e.target)[1]);
-          return;
-          break;
-        case '+', '\xbb':
-          plus(e.target);
-          return;
-          break;
+  function getItems() {
+    var items = [];
+    var elems = document.getElementsByTagName('div');
+    for (var n = 0; n < elems.length; n++) {
+      var e = elems[n];
+      if (e.id.substring(0, 7) == 'update-') {
+        items.push(e);
       }
+    }
+    return items;
+  }
+
+  function getOffset(elem){
+    var y = 0;
+    while(elem.parentNode){
+      y += elem.offsetTop;
+      elem = elem.parentNode;
+    }
+    return y;
+  }
+
+  var globalKeymap = {
+    'gg': function(e) {
+      var elems = getItems();
+      var elem = elems[0];
+      window.scrollTo(0, getOffset(elem) - 100);
+      click(elem);
+      return true;
+    },
+    'G': function(e) {
+      var elems = getItems();
+      var elem = elems[elems.length-1];
+      window.scrollTo(0, getOffset(elem) - 100);
+      click(elem);
+      return true;
+    },
+    'n': function(e) {
+      click(document.getElementById('gbi1'));
+      return true;
+    },
+    'gh': function(e) {
+      location.href = 'https://plus.google.com/';
+      return true;
+    },
+    'gP': function(e) {
+      location.href = 'https://plus.google.com/photos';
+      return true;
+    },
+    'gp': function(e) {
+      location.href = 'https://plus.google.com/me';
+      return true;
+    },
+    'gc': function(e) {
+      location.href = 'https://plus.google.com/circles';
+      return true;
+    }
+  };
+
+  var itemKeymap = {
+    'i': function(e) {
+      if (newEntry()) {
+        return true;
+      }
+      return false;
+    },
+    'c': function(e) {
+      if (!e.ctrlKey) {
+        click(tools(e.target)[0]);
+        return true;
+      }
+      return false;
+    },
+    'n': function(e) {
+      click(document.getElementById('gbi1'));
+      return true;
+    },
+    's': function(e) {
+      click(tools(e.target)[1]);
+      return true;
+    },
+    '+': function(e) {
+      plus(e.target);
+      return true;
+    }
+  };
+  for (var k in globalKeymap) {
+    itemKeymap[k] = globalKeymap[k]
+  }
+
+  var stack = "";
+  var timer = 0;
+  function handleKeys(e, m) {
+    var c = String.fromCharCode(e.which ? e.which :
+        e.keyCode ? e.keyCode : e.charCode);
+    stack += c;
+    var u = 0;
+    for (var k in m) {
+      if (k == stack) {
+        var f = m[stack];
+        if (f) {
+          stack = "";
+          if (f(e)) return true;
+        }
+        return false;
+      } else if (k.substring(0, stack.length) == stack) {
+        u++;
+      }
+    }
+    try { clearTimeout(timer) } catch(ee) {};
+    if (u) {
+      timer = setTimeout(function() {
+        var f = m[stack];
+        stack = "";
+        if (f) f(e);
+      }, 2000);
+    } else {
       e.preventDefault();
+      stack = "";
+    }
+  }
+
+  function installGlobalKeys(elem) {
+    elem.addEventListener('keypress', function(e) {
+      if (e.target.id.substring(0, 7) == 'update-') return;
+      return handleKeys(e, globalKeymap);
+    }, false)
+  }
+
+  function installItemKeys(elem) {
+    elem.addEventListener('keypress', function(e) {
+      if (e.target.id.substring(0, 7) != 'update-') return;
+      return handleKeys(e, itemKeymap);
     }, false)
     elem.className += ' gpcommander';
   }
@@ -203,11 +296,12 @@
     for (var n = 0; n < elems.length; n++) {
       var e = elems[n];
       if (e.id.substring(0, 7) == 'update-' && !hasClass(e, 'gpcommander')) {
-        installKey(e);
+        installItemKeys(e);
       } else if (hasClass(e, 'editable') && !hasClass(e, 'gpcommander')) {
         installEditorKeys(e);
       }
     }
   }
   window.setInterval(install, 1000);
+  installGlobalKeys(document.body);
 })()
