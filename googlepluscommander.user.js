@@ -206,7 +206,7 @@
   function installGlobalKeys(elem) {
     elem.addEventListener('keypress', function(e) {
       if (e.target.id.substring(0, 7) == 'update-') return;
-      if (hasClass(e.target, 'editable')) return;
+      if (e.target.nodeName.toLowerCase() == 'input') return;
       return handleKeys(e, globalKeymap);
     }, false)
   }
