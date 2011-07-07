@@ -179,6 +179,7 @@
     var u = 0;
     for (var k in m) {
       if (k == stack) {
+        e.preventDefault();
         var f = m[stack];
         if (f) {
           stack = "";
@@ -191,13 +192,13 @@
     }
     try { clearTimeout(timer) } catch(ee) {};
     if (u) {
+      e.preventDefault();
       timer = setTimeout(function() {
         var f = m[stack];
         stack = "";
         if (f) f(e);
       }, 2000);
     } else {
-      e.preventDefault();
       stack = "";
     }
   }
