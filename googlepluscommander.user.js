@@ -207,6 +207,7 @@
     elem.addEventListener('keypress', function(e) {
       if (e.target.id.substring(0, 7) == 'update-') return;
       if (e.target.nodeName.toLowerCase() == 'input') return;
+      if (e.target.getAttribute('g_editable') == 'true') return;
       return handleKeys(e, globalKeymap);
     }, false)
   }
