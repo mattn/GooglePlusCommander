@@ -17,7 +17,7 @@ This is userscript for Google+. This script provide shortcut keys to do followin
 * gh to go to Home.
 * gP to go to Photos.
 * gp to go to Profile.
-* gc to go to Cyrcles.
+* gc to go to Circles.
 
 Install
 -------
