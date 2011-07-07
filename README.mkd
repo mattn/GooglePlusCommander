@@ -9,11 +9,15 @@ This is userscript for Google+. This script provide shortcut keys to do followin
 * c to comment
 * s to share
 * + to +1
-* g to go to top.
+* gg to go to top.
 * G to go to bottom.
 * n to show notification panel.
 * i to focus to a form of new entry.
 * esc to close current active textbox.
+* gh to go to Home.
+* gP to go to Photos.
+* gp to go to Profile.
+* gc to go to Cyrcles.
 
 Install
 -------
