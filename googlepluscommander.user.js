@@ -33,6 +33,7 @@
     for (var n = 0; n < elems.length; n++) {
       if (elems[n].getAttribute('g:type') == 'plusone') {
         click(elems[n]);
+        break;
       }
     }
   }
