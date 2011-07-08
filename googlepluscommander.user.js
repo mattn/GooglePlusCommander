@@ -224,7 +224,7 @@
   function installEditorKeys(elem) {
     elem.addEventListener('keyup', function(e) {
       var hooked = false;
-      if (hasClass(e.target, 'editable')) {
+      if (hasClass(e.target, 'editable') && e.target.innerHTML.replace(/<[^>]+>/g, '').length == 0) {
         var c = String.fromCharCode(e.keyCode ? e.keyCode : e.charCode);
         if (!e.shiftKey) {
           c = c.toLowerCase();
