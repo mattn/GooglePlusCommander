@@ -18,11 +18,18 @@ This is userscript for Google+. This script provide shortcut keys to do followin
 * gP to go to Photos.
 * gp to go to Profile.
 * gc to go to Circles.
+* gna to go to Notifications(all).
+* gnc to go to Notifications(circle).
+* gno to go to Notifications(otherposts).
+* gnp to go to Notifications(myposts).
+* gnm to go to Notifications(mentions).
+* gnP to go to Notifications(phototags).
 
 Install
 -------
 
 https://github.com/mattn/GooglePlusCommander/raw/master/googlepluscommander.user.js
+https://github.com/suvene/GooglePlusCommander/raw/master/googlepluscommander.user.js
 
 Author
 ------

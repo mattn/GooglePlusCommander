@@ -137,7 +137,32 @@
     'gc': function(e) {
       location.href = 'https://plus.google.com/circles';
       return true;
+    },
+    'gna': function(e) {
+      location.href = 'https://plus.google.com/notifications/all';
+      return true;
+    },
+    'gnc': function(e) {
+      location.href = 'https://plus.google.com/notifications/circle';
+      return true;
+    },
+    'gno': function(e) {
+      location.href = 'https://plus.google.com/notifications/otherposts';
+      return true;
+    },
+    'gnm': function(e) {
+      location.href = 'https://plus.google.com/notifications/myposts';
+      return true;
+    },
+    'gnM': function(e) {
+      location.href = 'https://plus.google.com/notifications/mentions';
+      return true;
+    },
+    'gnP': function(e) {
+      location.href = 'https://plus.google.com/notifications/phototags';
+      return true;
     }
+
   };
 
   var itemKeymap = {
