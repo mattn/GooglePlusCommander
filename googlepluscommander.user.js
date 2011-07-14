@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name  Google+ Commander
 // @author mattn
-// @version Thu, 14 Jul 2011
+// @version 0.2
 // @namespace https://github.com/mattn/googlepluscommander
 // @description keybinds for Google+. you can use j/k to scroll, and type 'c' to comment, 's' to share, '+' to +1.
 // @include https://plus.google.com/*
