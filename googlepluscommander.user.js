@@ -137,6 +137,11 @@
     'gc': function(e) {
       location.href = 'https://plus.google.com/circles';
       return true;
+    },
+    '/': function(e) {
+      window.scrollTo(0, 0);
+      document.getElementById('oz-search-box').focus();
+      return true;
     }
   };
 
@@ -161,6 +166,11 @@
     's': function(e) {
       click(tools(e.target)[1]);
       return true;
+    },
+    'm': function(e) {
+      var mute = getElementsByTagAndClassName("div", "d-ra-p", e.target)[2];
+      mousedown(mute);
+      mouseup(mute);
     },
     '+': function(e) {
       plus(e.target);
@@ -250,9 +260,9 @@
     return false;
   }
 
-  function getElementsByTagAndClassName(tag, clazz) {
+  function getElementsByTagAndClassName(tag, clazz, node) {
     var retval = [];
-    var elems = document.getElementsByTagName(tag);
+    var elems = (node || document).getElementsByTagName(tag);
     for (var i = 0, I = elems.length; i < I; ++i) {
       var e = elems[i];
       if (hasClass(e, clazz)) {
