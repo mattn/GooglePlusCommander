@@ -168,7 +168,8 @@
       return true;
     },
     'm': function(e) {
-      var mute = getElementsByTagAndClassName("div", "d-ra-p", e.target)[2];
+      var menus = getElementsByTagAndClassName("div", "d-ra-p", e.target);
+      var mute = menus[menus.length-2];
       mousedown(mute);
       mouseup(mute);
     },
