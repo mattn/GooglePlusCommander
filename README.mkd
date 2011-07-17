@@ -8,8 +8,10 @@ This is userscript for Google+. This script provide shortcut keys to do followin
 
 * c to comment
 * s to share
+* e clip to Evernote
 * m to mute
 * + to +1
+* * expand comments
 * / to find user
 * gg to go to top.
 * G to go to bottom.
@@ -30,11 +32,17 @@ This is userscript for Google+. This script provide shortcut keys to do followin
 Install
 -------
 
-https://github.com/mattn/GooglePlusCommander/raw/master/googlepluscommander.user.js
 https://github.com/suvene/GooglePlusCommander/raw/master/googlepluscommander.user.js
+original: https://github.com/mattn/GooglePlusCommander/raw/master/googlepluscommander.user.js
 
 Author
 ------
 
-mattn <mattn.jp@gmail.com>
+suVene <suvene@zeromemory.info>
+original: mattn <mattn.jp@gmail.com>
+
+Other
+-----
+
+* (Test)insert a evernote affiliate code
 

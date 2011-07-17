@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name  Google+ Commander
-// @author mattn
-// @version 0.3
-// @namespace https://github.com/mattn/googlepluscommander
+// @author suVene(original: mattn)
+// @version 0.3.1
+// @namespace https://github.com/suvene/googlepluscommander
 // @description keybinds for Google+. you can use j/k to scroll, and type 'c' to comment, 's' to share, '+' to +1.
 // @include https://plus.google.com/*
 // @match https://plus.google.com/*
@@ -50,6 +50,27 @@
           next = next.nextSibling;
         }
       }
+    }
+    return ret;
+  }
+
+  function expand(elem) {
+    var elems = elem.getElementsByTagName('span');
+    for (var n = 0; n < elems.length; n++) {
+      if (elems[n].getAttribute('role') == 'button' && elems[n].getAttribute('class').match('a-b-f-i-gc')) {
+        click(elems[n]);
+      }
+    }
+  }
+
+  function getPermalinks(elem) {
+    var ret = [];
+    var elems = elem.getElementsByTagName('a');
+    for (var n = 0; n < elems.length; n++) {
+      if (elems[n].getAttribute('href').match('/posts/')) {
+        ret.push(elems[n]);
+      }
+      // how gets the child permalinks ?
     }
     return ret;
   }
@@ -199,6 +220,14 @@
     '+': function(e) {
       plus(e.target);
       return true;
+    },
+    '*': function(e) {
+      expand(e.target);
+      return true;
+    },
+    'e': function(e) {
+      click(tools(e.target)[2]);
+      return true;
     }
   };
   for (var k in globalKeymap) {
@@ -311,7 +340,7 @@
 
   function findElementFromNext(elem, matcher) {
     for (var curr = elem.nextSibling; curr; curr = curr.nextSibling) {
-      var found = findElement(curr, matcher); 
+      var found = findElement(curr, matcher);
       if (found) {
         return found;
       }
@@ -329,12 +358,37 @@
     });
   }
 
+  function installEvernoteClip(elem) {
+    var ns = tools(elem);
+    var url = getPermalinks(elem);
+    var ln = ns[ns.length - 1];
+    var n = document.createTextNode('  -  ');
+    ln.parentNode.appendChild(n);
+    // n = document.createElement('span');
+    // n.appendChild(document.createTextNode('ClipEver'));
+    n = document.createElement('img');
+    n.setAttribute('src', 'http://static.evernote.com/article-clipper.png');
+    n.setAttribute('class', 'd-h');
+    n.setAttribute('role', 'button');
+    n.setAttribute('tabindex', '0');
+    n.setAttribute('onclick', "Evernote.doClip({styling: 'full', url: '" + url + "', code: '____2531', contentId: '" + elem.id + "'})");
+    ln.parentNode.appendChild(n);
+  }
+
+  function installExternalScripts() {
+    var n = document.createElement('script');
+    n.setAttribute('type', 'text/javascript');
+    n.setAttribute('src', 'http://static.evernote.com/noteit.js');
+    document.getElementsByTagName('head')[0].appendChild(n);
+  }
+
   function install() {
     var elems = document.getElementsByTagName('div');
     for (var n = 0; n < elems.length; n++) {
       var e = elems[n];
       if (e.id.substring(0, 7) == 'update-' && !hasClass(e, 'gpcommander')) {
         installItemKeys(e);
+        installEvernoteClip(e);
       } else if (hasClass(e, 'editable') && !hasClass(e, 'gpcommander')) {
         installEditorKeys(e);
       }
@@ -342,4 +396,5 @@
   }
   window.setInterval(install, 1000);
   installGlobalKeys(document.body);
+  installExternalScripts();
 })()
