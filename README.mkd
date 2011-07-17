@@ -32,14 +32,14 @@ This is userscript for Google+. This script provide shortcut keys to do followin
 Install
 -------
 
-https://github.com/suvene/GooglePlusCommander/raw/master/googlepluscommander.user.js
-original: https://github.com/mattn/GooglePlusCommander/raw/master/googlepluscommander.user.js
+- https://github.com/suvene/GooglePlusCommander/raw/master/googlepluscommander.user.js
+- original: https://github.com/mattn/GooglePlusCommander/raw/master/googlepluscommander.user.js
 
 Author
 ------
 
-suVene <suvene@zeromemory.info>
-original: mattn <mattn.jp@gmail.com>
+- suVene <suvene@zeromemory.info>
+- original: mattn <mattn.jp@gmail.com>
 
 Other
 -----
