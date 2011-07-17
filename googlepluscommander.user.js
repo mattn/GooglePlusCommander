@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name  Google+ Commander
 // @author mattn
-// @version Tue, 05 Jul 2011
+// @version 0.3
 // @namespace https://github.com/mattn/googlepluscommander
 // @description keybinds for Google+. you can use j/k to scroll, and type 'c' to comment, 's' to share, '+' to +1.
 // @include https://plus.google.com/*
@@ -138,6 +138,10 @@
       location.href = 'https://plus.google.com/circles';
       return true;
     },
+    '/': function(e) {
+      window.scrollTo(0, 0);
+      document.getElementById('oz-search-box').focus();
+    },
     'gna': function(e) {
       location.href = 'https://plus.google.com/notifications/all';
       return true;
@@ -162,7 +166,6 @@
       location.href = 'https://plus.google.com/notifications/phototags';
       return true;
     }
-
   };
 
   var itemKeymap = {
@@ -186,6 +189,12 @@
     's': function(e) {
       click(tools(e.target)[1]);
       return true;
+    },
+    'm': function(e) {
+      var menus = getElementsByTagAndClassName("div", "d-ra-p", e.target);
+      var mute = menus[menus.length-2];
+      mousedown(mute);
+      mouseup(mute);
     },
     '+': function(e) {
       plus(e.target);
@@ -275,9 +284,9 @@
     return false;
   }
 
-  function getElementsByTagAndClassName(tag, clazz) {
+  function getElementsByTagAndClassName(tag, clazz, node) {
     var retval = [];
-    var elems = document.getElementsByTagName(tag);
+    var elems = (node || document).getElementsByTagName(tag);
     for (var i = 0, I = elems.length; i < I; ++i) {
       var e = elems[i];
       if (hasClass(e, clazz)) {
