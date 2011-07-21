@@ -388,7 +388,7 @@
       var e = elems[n];
       if (e.id.substring(0, 7) == 'update-' && !hasClass(e, 'gpcommander')) {
         installItemKeys(e);
-        installEvernoteClip(e);
+        //installEvernoteClip(e);
       } else if (hasClass(e, 'editable') && !hasClass(e, 'gpcommander')) {
         installEditorKeys(e);
       }
