@@ -8,7 +8,7 @@ This is userscript for Google+. This script provide shortcut keys to do followin
 
 * c to comment
 * s to share
-* e clip to Evernote
+* e clip to Evernote (currently disabled)
 * m to mute
 * + to +1
 * * expand comments
