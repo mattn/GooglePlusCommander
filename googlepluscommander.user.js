@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name  Google+ Commander
 // @author suVene(original: mattn)
-// @version 0.3.2
+// @version 0.3.3
 // @namespace https://github.com/suvene/googlepluscommander
 // @description keybinds for Google+. you can use j/k to scroll, and type 'c' to comment, 's' to share, '+' to +1.
 // @include https://plus.google.com/*
@@ -76,7 +76,7 @@
   }
 
   function newEntry() {
-    var elems = getElementsByTagAndClassName('div', 'n-Nd');
+    var elems = getElementsByTagAndClassName('div', 'h-Ae');
     if (elems.length > 0) {
       window.scrollTo(0, 0);
       click(elems[0]);
@@ -212,7 +212,7 @@
       return true;
     },
     'm': function(e) {
-      var menus = getElementsByTagAndClassName("div", "d-ra-p", e.target);
+      var menus = getElementsByAttribute("div", "role", "menuitem", e.target);
       var mute = menus[menus.length-2];
       mousedown(mute);
       mouseup(mute);
@@ -225,10 +225,10 @@
       expand(e.target);
       return true;
     },
-    'e': function(e) {
-      click(tools(e.target)[2]);
-      return true;
-    }
+    //'e': function(e) {
+    //  click(tools(e.target)[2]);
+    //  return true;
+    //}
   };
   for (var k in globalKeymap) {
     itemKeymap[k] = globalKeymap[k]
@@ -311,6 +311,18 @@
       if (zz[m] == clazz) return true;
     }
     return false;
+  }
+
+  function getElementsByAttribute(tag, attr, value, node) {
+    var retval = [];
+    var elems = (node || document).getElementsByTagName(tag);
+    for (var i = 0, I = elems.length; i < I; ++i) {
+      var e = elems[i];
+      if (e.getAttribute(attr) == value) {
+        retval.push(e);
+      }
+    }
+    return retval;
   }
 
   function getElementsByTagAndClassName(tag, clazz, node) {
