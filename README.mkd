@@ -38,7 +38,7 @@ Author
 ------
 
 - suVene <suvene@zeromemory.info>
-- original: mattn <mattn.jp@gmail.com>
+- mattn <mattn.jp@gmail.com>
 
 Other
 -----
