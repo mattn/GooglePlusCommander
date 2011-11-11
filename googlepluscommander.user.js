@@ -10,6 +10,7 @@
 
 (function() {
   function invokeMouseEvent(elem, evname) {
+    if (!elem) { return; }
     var e = document.createEvent('MouseEvents');
     e.initMouseEvent(evname, true, true, e.view||window, 0, 0, 0, 0, 0,
       false, false, false, false, 0, null);
@@ -31,7 +32,7 @@
   function plus(elem) {
     var elems = elem.getElementsByTagName('button');
     for (var n = 0; n < elems.length; n++) {
-      if (elems[n].getAttribute('g:type') == 'plusone') {
+      if (elems[n].getAttribute('title').match(/\+1/)) {
         click(elems[n]);
         break;
       }
@@ -39,29 +40,8 @@
   }
 
   function tools(elem) {
-    var ret = [];
-    var elems = elem.getElementsByTagName('button');
-    for (var n = 0; n < elems.length; n++) {
-      if (elems[n].getAttribute('g:type') == 'plusone') {
-        var next = elems[n];
-        while (next) {
-          if (next.nodeType == 1 && next.getAttribute('role') == 'button') {
-            ret.push(next);
-          }
-          next = next.nextSibling;
-        }
-      }
-    }
-    return ret;
-  }
-
-  function expand(elem) {
-    var elems = elem.getElementsByTagName('span');
-    for (var n = 0; n < elems.length; n++) {
-      if (elems[n].getAttribute('role') == 'button' && elems[n].getAttribute('class').match('a-b-f-i-gc')) {
-        click(elems[n]);
-      }
-    }
+    elem = getElementsByTagAndClassName('div', 'dl')[0];
+    return getElementsByAttribute("span", "role", "button", elem);
   }
 
   function getPermalinks(elem) {
@@ -77,7 +57,7 @@
   }
 
   function newEntry() {
-    var elems = getElementsByTagAndClassName('div', 'h-Ae');
+    var elems = getElementsByTagAndClassName('div', 'f-xe');
     if (elems.length > 0) {
       window.scrollTo(0, 0);
       click(elems[0]);
@@ -213,6 +193,7 @@
       return true;
     },
     'm': function(e) {
+      click(getElementsByAttribute("span", "role", "button", e.target)[0]);
       var menus = getElementsByAttribute("div", "role", "menuitem", e.target);
       var mute = menus[menus.length-2];
       mousedown(mute);
@@ -223,7 +204,7 @@
       return true;
     },
     '*': function(e) {
-      expand(e.target);
+      click(getElementsByTagAndClassName('span', 'px', e.target)[0]);
       return true;
     }
     //'e': function(e) {
