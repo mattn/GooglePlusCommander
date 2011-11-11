@@ -199,6 +199,10 @@
       mousedown(mute);
       mouseup(mute);
     },
+    'l': function(e) {
+      plus(e.target);
+      return true;
+    },
     '+': function(e) {
       plus(e.target);
       return true;
