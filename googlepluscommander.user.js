@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name  Google+ Commander
 // @author mattn
-// @version 0.3.3
+// @version 0.3.4
 // @namespace https://github.com/suvene/googlepluscommander
 // @description keybinds for Google+. you can use j/k to scroll, and type 'c' to comment, 's' to share, '+' to +1.
 // @include https://plus.google.com/*
@@ -45,8 +45,9 @@
       if (elems[n].getAttribute('g:type') == 'plusone') {
         var next = elems[n];
         while (next) {
-          if (next.nodeType == 1 && next.getAttribute('role') == 'button')
+          if (next.nodeType == 1 && next.getAttribute('role') == 'button') {
             ret.push(next);
+          }
           next = next.nextSibling;
         }
       }
@@ -224,14 +225,16 @@
     '*': function(e) {
       expand(e.target);
       return true;
-    },
+    }
     //'e': function(e) {
     //  click(tools(e.target)[2]);
     //  return true;
     //}
   };
   for (var k in globalKeymap) {
-    itemKeymap[k] = globalKeymap[k]
+    if (globalKeymap.hasOwnProperty(k)) {
+      itemKeymap[k] = globalKeymap[k];
+    }
   }
 
   var stack = "";
@@ -247,20 +250,24 @@
         var f = m[stack];
         if (f) {
           stack = "";
-          if (f(e)) return true;
+          if (f(e)) {
+            return true;
+          }
         }
         return false;
       } else if (k.substring(0, stack.length) == stack) {
         u++;
       }
     }
-    try { clearTimeout(timer) } catch(ee) {};
+    try { clearTimeout(timer); } catch(ee) {}
     if (u) {
       e.preventDefault();
       timer = setTimeout(function() {
         var f = m[stack];
         stack = "";
-        if (f) f(e);
+        if (f) {
+          f(e);
+        }
       }, 2000);
     } else {
       stack = "";
@@ -269,46 +276,44 @@
 
   function installGlobalKeys(elem) {
     elem.addEventListener('keypress', function(e) {
-      if (e.target.id.substring(0, 7) == 'update-') return;
-      if (e.target.nodeName.toLowerCase() == 'input') return;
-      if (e.target.getAttribute('g_editable') == 'true') return;
+      if (e.target.id.substring(0, 7) == 'update-') { return; }
+      if (e.target.nodeName.toLowerCase() == 'input') { return; }
+      if (e.target.getAttribute('g_editable') == 'true') { return; }
       return handleKeys(e, globalKeymap);
-    }, false)
+    }, false);
   }
 
   function installItemKeys(elem) {
     elem.addEventListener('keypress', function(e) {
-      if (e.target.id.substring(0, 7) != 'update-') return;
+      if (e.target.id.substring(0, 7) != 'update-') { return; }
       return handleKeys(e, itemKeymap);
-    }, false)
+    }, false);
     elem.className += ' gpcommander';
   }
 
   function installEditorKeys(elem) {
     elem.addEventListener('keyup', function(e) {
       var hooked = false;
-      if (hasClass(e.target, 'editable') && e.target.innerHTML.replace(/<[^>]+>/g, '').length == 0) {
+      if (hasClass(e.target, 'editable') && e.target.innerHTML.replace(/<[^>]+>/g, '').length === 0) {
         var c = String.fromCharCode(e.keyCode ? e.keyCode : e.charCode);
         if (!e.shiftKey) {
           c = c.toLowerCase();
         }
-        switch (c) {
-          case '\x1b':
+        if (c === '\x1b') {
             hooked = closeForm(e.target);
-            break;
         }
       }
       if (!hooked) {
         e.preventDefault();
       }
-    }, false)
+    }, false);
     elem.className += ' gpcommander';
   }
 
   function hasClass(elem, clazz) {
     var zz = elem.className.split(/\s+/g);
     for (var m = 0; m < zz.length; m++) {
-      if (zz[m] == clazz) return true;
+      if (zz[m] == clazz) { return true; }
     }
     return false;
   }
@@ -408,5 +413,5 @@
   }
   window.setInterval(install, 1000);
   installGlobalKeys(document.body);
-  installExternalScripts();
-})()
+  //installExternalScripts();
+})();
